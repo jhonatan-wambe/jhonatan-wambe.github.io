@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Rondon | Math & CS</title>
+    <style>
+        /* Estilos básicos para que se vea limpio y moderno */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #24292e; /* Color estilo GitHub */
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: 2.5rem; }
+        .subtitle { color: #8b949e; margin-top: 10px; font-size: 1.2rem; }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Tarjetas de Proyectos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block; /* Para que funcione como enlace */
+        }
+        
+        .card:hover { transform: translateY(-5px); border-top: 5px solid #2ea44f; }
+        
+        .card h3 { margin-top: 0; color: #0366d6; }
+        .tag {
+            background: #e1e4e8;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: #586069;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Esto hace que los enlaces vacíos no hagan nada por ahora */
+        a.disabled { pointer-events: none; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Jonathan Rondon</h1>
+        <div class="subtitle">Math & CS Student @URosario</div>
+    </header>
+
+    <div class="container">
+        
+        <div class="intro">
+            <p>👋 Hola, soy Jonathan. Exploro la intersección entre los <strong>modelos matemáticos</strong>, el <strong>IoT</strong> y la cultura.</p>
+            <p>Aquí publico mis experimentos de código y visualización de datos.</p>
+        </div>
+
+        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Mis Proyectos</h2>
+        
+        <div class="projects-grid">
+            
+            <a href="#" class="card disabled">
+                <h3>🌱 Cultivo Hidropónico IoT</h3>
+                <p>Monitoreo en tiempo real de humedad y temperatura con ESP32 y Supabase.</p>
+                <span class="tag">C++</span> <span class="tag">IoT</span> <span class="tag">En Construcción 🚧</span>
+            </a>
+
+            <a href="#" class="card disabled">
+                <h3>📊 Mortalidad Materna</h3>
+                <p>Análisis comparativo Colombia vs. Francia (1986-2024). Cálculo de R².</p>
+                <span class="tag">Data Viz</span> <span class="tag">Chart.js</span> <span class="tag">Próximamente</span>
+            </a>
+
+            <a href="#" class="card disabled">
+                <h3>🎨 Simbolismo Pijao</h3>
+                <p>Arte generativo y patrones indígenas recreados con código.</p>
+                <span class="tag">Creative Coding</span> <span class="tag">p5.js</span>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Conectemos en <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank">LinkedIn</a></p>
+        <p>© 2024 Jonathan Guambe</p>
+    </footer>
+
+</body>
+</html>
