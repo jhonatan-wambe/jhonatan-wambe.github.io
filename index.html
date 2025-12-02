@@ -3,152 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jhonatan Rondon | Math & CS</title>
+    <title>Jhonatan Rondon | Math & CS Portfolio</title>
     <style>
-        /* --- ESTILO DARK CYBERPUNK MINIMALISTA --- */
         :root {
-            --bg-color: #0a0a0c; /* Negro casi puro */
-            --text-color: #e0e0e0; /* Blanco suave */
-            --accent-color: #00fff2; /* Cian Neón Cyberpunk */
-            --card-bg: rgba(20, 20, 25, 0.7); /* Oscuro y semi-transparente */
+            --bg-color: #050505;       /* Negro profundo */
+            --card-bg: rgba(20, 20, 20, 0.6);
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --accent: #00fff2;         /* Cyan Cyberpunk */
+            --accent-dim: rgba(0, 255, 242, 0.1);
+            --border: #333;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace; /* Tipografía Monospace tipo "Hacker/Coder" */
             margin: 0;
             padding: 0;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden; /* Evita scroll horizontal indeseado */
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        /* El contenedor de las partículas (va detrás de todo) */
         #tsparticles {
             position: fixed;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* IMPORTANTE: Esto lo manda al fondo */
-            pointer-events: none; /* Deja que el mouse interactúe con el contenido, no con el canvas */
+            z-index: -1;
         }
 
+        /* Header Minimalista y Compacto */
         header {
-            /* Fondo transparente para ver las partículas */
-            background: linear-gradient(180deg, rgba(10,10,12,0.9) 0%, rgba(10,10,12,0) 100%);
-            padding: 3rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #333;
+            padding: 4rem 2rem;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0) 100%);
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 3rem;
-            letter-spacing: 2px;
-            /* Efecto de texto brillante sutil */
-            text-shadow: 0 0 10px rgba(0, 255, 242, 0.3);
+        .profile-meta h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 0 0 1rem 0;
+            font-family: 'Segoe UI', sans-serif; /* Nombre en sans-serif para contraste */
         }
 
-        .subtitle {
-            color: var(--accent-color); /* Color neón */
-            margin-top: 10px;
-            font-size: 1.1rem;
-            font-weight: 300;
+        .profile-meta p {
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-dim);
+            box-shadow: 0 0 15px var(--accent-dim);
+        }
+
+        /* Contenedor Principal */
+        .main-content {
+            max-width: 1400px; /* Ancho completo para mostrar muchos proyectos */
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 0 2rem;
-            position: relative; /* Necesario para el z-index */
-            z-index: 1; /* Asegura que el texto esté sobre las partículas */
-        }
-        
-        .intro {
-            text-align: center;
-            margin-bottom: 4rem;
-            font-size: 1.2rem;
-            font-weight: 300;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            display: block;
         }
 
-        .intro strong {
-            color: var(--accent-color);
-            font-weight: 500;
-        }
-
-        h2.section-title {
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        
-        /* --- TARJETAS CYBERPUNK --- */
-        .projects-grid {
+        /* Grilla de Alta Densidad */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsivo automático */
+            gap: 20px;
         }
-        
+
+        /* Tarjeta de Proyecto "Tech" */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
-            padding: 2rem;
-            border-radius: 4px; /* Bordes más rectos para estilo minimalista */
-            border: 1px solid #333;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
             text-decoration: none;
-            color: inherit;
-            display: block;
+            transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
         }
-        
-        /* Efecto Hover Cyberpunk */
-        .card:hover {
-            transform: translateY(-7px);
-            border-color: var(--accent-color);
-            box-shadow: 0 0 20px rgba(0, 255, 242, 0.2), inset 0 0 20px rgba(0, 255, 242, 0.1);
-        }
-        
-        .card h3 {
-            margin-top: 0;
-            color: var(--accent-color);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-        
-        .card p { color: #aaa; font-size: 0.95rem; }
 
-        .tag {
-            background: rgba(255,255,255,0.1);
-            padding: 4px 10px;
-            border-radius: 2px; /* Tags cuadradas */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 2px; height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--text-muted);
+            transform: translateY(-2px);
+            background: rgba(30,30,30, 0.8);
+        }
+
+        .card:hover::before { opacity: 1; }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .folder-icon {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--text-muted);
+            border-radius: 2px;
+            position: relative;
+        }
+        .folder-icon::after {
+            content: '';
+            position: absolute;
+            top: -3px; left: 0;
+            width: 8px; height: 3px;
+            background: var(--text-muted);
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 600;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin: 0.5rem 0 1.5rem 0;
+            flex-grow: 1;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
             font-size: 0.75rem;
-            color: #ccc;
-            border: 1px solid #444;
-            margin-right: 5px;
+            color: var(--accent);
         }
 
         footer {
             text-align: center;
-            margin-top: 5rem;
-            padding: 3rem;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
+            padding: 4rem 0;
+            color: var(--border);
+            font-size: 0.8rem;
         }
-        
-        footer a { color: var(--accent-color); text-decoration: none; }
-        
-        a.disabled { pointer-events: none; opacity: 0.5; filter: grayscale(1); }
+
     </style>
 </head>
 <body>
@@ -156,127 +185,135 @@
     <div id="tsparticles"></div>
 
     <header>
-        <h1>Jhonatan Rondon</h1>
-        <div class="subtitle">Math & CS Student @URosario</div>
+        <div class="profile-meta">
+            <h1>Jhonatan Rondon</h1>
+            <p>
+                Math & CS Student @URosario.<br>
+                Desarrollando soluciones en IoT, modelado matemático y visualización de datos.
+                Explorando la frontera entre la lógica algorítmica y la realidad física.
+            </p>
+            <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank" class="social-link">LinkedIn Profile</a>
+        </div>
     </header>
 
-    <div class="container">
+    <div class="main-content">
+        <span class="section-label">Repositorio de Proyectos</span>
         
-        <div class="intro">
-            <p>👋 Hola. Exploro la intersección entre los <strong>modelos matemáticos</strong>, el <strong>IoT</strong> y la cultura.</p>
-            <p>Aquí publico mis experimentos de código y visualización de datos.</p>
-        </div>
-
-        <h2 class="section-title">Proyectos Selectos</h2>
-        
-        <div class="projects-grid">
+        <div class="grid" id="project-grid">
             
-            <a href="#" class="card disabled">
-                <h3>🌱 Cultivo Hidropónico IoT</h3>
-                <p>Monitoreo en tiempo real de variables ambientales. ESP32 + Supabase.</p>
-                <div style="margin-top: 15px;">
-                    <span class="tag">C++</span> <span class="tag">Hardware</span> <span class="tag">En Construcción 🚧</span>
+            <a href="#" class="card">
+                <div class="card-header">
+                    <h3>Cultivo Hidropónico IoT</h3>
+                </div>
+                <p>Sistema de monitoreo ambiental distribuido usando ESP32 y transmisión de datos a Supabase en tiempo real.</p>
+                <div class="tech-stack">
+                    <span>C++</span> <span>ESP32</span> <span>Supabase</span>
                 </div>
             </a>
 
-            <a href="#" class="card disabled">
-                <h3>📊 Mortalidad Materna</h3>
-                <p>Análisis comparativo Colombia vs. Francia (1986-2024). Modelado estadístico.</p>
-                <div style="margin-top: 15px;">
-                    <span class="tag">Data Viz</span> <span class="tag">Chart.js</span> <span class="tag">Math</span>
+            <a href="#" class="card">
+                <div class="card-header">
+                    <h3>Mortalidad Materna</h3>
+                </div>
+                <p>Análisis estadístico comparativo (Colombia vs Francia 1986-2024). Cálculo de correlaciones y visualización.</p>
+                <div class="tech-stack">
+                    <span>DataSci</span> <span>R</span> <span>Chart.js</span>
                 </div>
             </a>
 
-            <a href="#" class="card disabled">
-                <h3>🎨 Simbolismo Pijao</h3>
-                <p>Arte generativo y patrones indígenas recreados mediante algoritmos.</p>
-                <div style="margin-top: 15px;">
-                    <span class="tag">Creative Coding</span> <span class="tag">p5.js</span>
+            <a href="#" class="card">
+                <div class="card-header">
+                    <h3>Simbolismo Pijao</h3>
+                </div>
+                <p>Reconstrucción algorítmica de patrones indígenas tradicionales mediante código generativo.</p>
+                <div class="tech-stack">
+                    <span>p5.js</span> <span>Generative Art</span>
                 </div>
             </a>
 
-        </div>
+            </div>
     </div>
 
     <footer>
-        <p>Conectemos en <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank">LinkedIn</a></p>
-        <p>© 2024 Jhonatan. Code + Culture.</p>
+        2024 Jhonatan Rondon. Estructura de portafolio v1.0
     </footer>
-
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
     
     <script>
-        // Esta función inicia el motor de partículas
+        // 1. CONFIGURACIÓN DE PARTÍCULAS (Estilo Red Neuronal / Fluido Matemático)
         (async () => {
             await tsParticles.load("tsparticles", {
-                // Configuración Cyberpunk Fluida
                 particles: {
-                    number: {
-                        value: 60, // Cantidad de partículas (no pongas muchas o se pone lento)
-                        density: { enable: true, value_area: 800 }
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "circle" }, // Puntos en vez de cuadrados
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 2, random: true },
+                    links: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffffff",
+                        opacity: 0.15, // Líneas muy sutiles
+                        width: 1
                     },
-                    color: {
-                        value: "#ffffff" // Color blanco
-                    },
-                    shape: {
-                        type: "edge", // "edge" son cuadrados perfectos
-                    },
-                    opacity: {
-                        value: 0.3, // Semi-transparentes
-                        random: true,
-                        anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
-                    },
-                    size: {
-                        value: 4, // Tamaño base
-                        random: true, // Tamaños variados
-                        anim: { enable: false }
-                    },
-                    // Esta es la parte de movimiento "fluido"
                     move: {
                         enable: true,
-                        speed: 0.8, // Lento y suave
+                        speed: 1, // Movimiento constante
                         direction: "none",
-                        random: true, // Movimiento caótico pero suave
+                        random: false,
                         straight: false,
-                        out_mode: "out", // Cuando salen de la pantalla, vuelven a entrar
-                        bounce: false,
-                        attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                        out_mode: "out",
+                        attract: { enable: false, rotateX: 600, rotateY: 1200 }
                     }
                 },
-                // Interactividad con el mouse
                 interactivity: {
                     detect_on: "canvas",
                     events: {
-                        onhover: {
-                            enable: true,
-                            mode: "bubble" // "bubble" hace que crezcan, "repulse" hace que huyan
-                        },
+                        onhover: { enable: true, mode: "grab" }, // Efecto de conectar nodos al pasar el mouse
                         onclick: { enable: true, mode: "push" },
                         resize: true
                     },
                     modes: {
-                        bubble: {
-                            distance: 200,
-                            size: 8, // Crecen al pasar el mouse
-                            duration: 2,
-                            opacity: 0.8,
-                            speed: 3
-                        },
-                        repulse: { distance: 200, duration: 0.4 }
+                        grab: { distance: 140, line_linked: { opacity: 0.5 } },
+                        push: { particles_nb: 4 }
                     }
                 },
                 retina_detect: true,
-                background: {
-                    color: "transparent", // El fondo es transparente para ver el color del body
-                    image: "",
-                    position: "50% 50%",
-                    repeat: "no-repeat",
-                    size: "cover"
-                }
+                background: { color: "transparent" }
             });
         })();
-    </script>
 
+        // 2. GENERADOR DE PROYECTOS DE RELLENO (Para simular los 20 proyectos)
+        const grid = document.getElementById('project-grid');
+        const totalProjects = 20; // Queremos ver 20 en total
+        const existing = 3; // Ya tenemos 3 reales
+
+        // Nombres aleatorios para que se vea realista
+        const fakeTitles = ["Neural Net Optimization", "Traffic Simulation", "Weather Station v2", "Cryptography Algo", "React Dashboard", "Python Scraper", "Smart Home Hub", "Fourier Transform Viz", "Chaos Theory Model"];
+        const fakeTech = ["Python", "JS", "Rust", "TensorFlow", "React", "Node"];
+
+        for (let i = existing + 1; i <= totalProjects; i++) {
+            // Crear tarjeta
+            const card = document.createElement('a');
+            card.className = 'card';
+            card.href = '#'; // Link vacío
+            
+            // Título aleatorio
+            const randomTitle = fakeTitles[Math.floor(Math.random() * fakeTitles.length)] + " " + i;
+            
+            card.innerHTML = `
+                <div class="card-header">
+                    <h3>${randomTitle}</h3>
+                </div>
+                <p>Descripción breve del proyecto simulado para visualizar el espacio en la interfaz.</p>
+                <div class="tech-stack">
+                    <span>${fakeTech[Math.floor(Math.random() * fakeTech.length)]}</span>
+                    <span>Project ${i}</span>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+    </script>
 </body>
 </html>
