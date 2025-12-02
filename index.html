@@ -3,80 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Rondon | Math & CS</title>
+    <title>Jhonatan Rondon | Math & CS</title>
     <style>
-        /* Estilos básicos para que se vea limpio y moderno */
+        /* --- ESTILO DARK CYBERPUNK MINIMALISTA --- */
+        :root {
+            --bg-color: #0a0a0c; /* Negro casi puro */
+            --text-color: #e0e0e0; /* Blanco suave */
+            --accent-color: #00fff2; /* Cian Neón Cyberpunk */
+            --card-bg: rgba(20, 20, 25, 0.7); /* Oscuro y semi-transparente */
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden; /* Evita scroll horizontal indeseado */
         }
+
+        /* El contenedor de las partículas (va detrás de todo) */
+        #tsparticles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; /* IMPORTANTE: Esto lo manda al fondo */
+            pointer-events: none; /* Deja que el mouse interactúe con el contenido, no con el canvas */
+        }
+
         header {
-            background-color: #24292e; /* Color estilo GitHub */
-            color: white;
-            padding: 2rem 1rem;
+            /* Fondo transparente para ver las partículas */
+            background: linear-gradient(180deg, rgba(10,10,12,0.9) 0%, rgba(10,10,12,0) 100%);
+            padding: 3rem 1rem;
             text-align: center;
+            border-bottom: 1px solid #333;
         }
-        h1 { margin: 0; font-size: 2.5rem; }
-        .subtitle { color: #8b949e; margin-top: 10px; font-size: 1.2rem; }
+
+        h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 2px;
+            /* Efecto de texto brillante sutil */
+            text-shadow: 0 0 10px rgba(0, 255, 242, 0.3);
+        }
+
+        .subtitle {
+            color: var(--accent-color); /* Color neón */
+            margin-top: 10px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
         
         .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            position: relative; /* Necesario para el z-index */
+            z-index: 1; /* Asegura que el texto esté sobre las partículas */
         }
         
         .intro {
             text-align: center;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Tarjetas de Proyectos */
+        .intro strong {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        h2.section-title {
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* --- TARJETAS CYBERPUNK --- */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
         
         .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
+            background: var(--card-bg);
+            backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
+            padding: 2rem;
+            border-radius: 4px; /* Bordes más rectos para estilo minimalista */
+            border: 1px solid #333;
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
-            display: block; /* Para que funcione como enlace */
+            display: block;
+            position: relative;
+            overflow: hidden;
         }
         
-        .card:hover { transform: translateY(-5px); border-top: 5px solid #2ea44f; }
+        /* Efecto Hover Cyberpunk */
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.2), inset 0 0 20px rgba(0, 255, 242, 0.1);
+        }
         
-        .card h3 { margin-top: 0; color: #0366d6; }
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .card p { color: #aaa; font-size: 0.95rem; }
+
         .tag {
-            background: #e1e4e8;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            color: #586069;
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 2px; /* Tags cuadradas */
+            font-size: 0.75rem;
+            color: #ccc;
+            border: 1px solid #444;
+            margin-right: 5px;
         }
 
         footer {
             text-align: center;
-            margin-top: 4rem;
-            padding: 2rem;
+            margin-top: 5rem;
+            padding: 3rem;
             color: #666;
             font-size: 0.9rem;
+            border-top: 1px solid #222;
         }
         
-        /* Esto hace que los enlaces vacíos no hagan nada por ahora */
-        a.disabled { pointer-events: none; opacity: 0.6; }
+        footer a { color: var(--accent-color); text-decoration: none; }
+        
+        a.disabled { pointer-events: none; opacity: 0.5; filter: grayscale(1); }
     </style>
 </head>
 <body>
+
+    <div id="tsparticles"></div>
 
     <header>
         <h1>Jhonatan Rondon</h1>
@@ -86,30 +163,36 @@
     <div class="container">
         
         <div class="intro">
-            <p>👋 Hola, soy Jhonatan. Exploro la intersección entre los <strong>modelos matemáticos</strong>, el <strong>IoT</strong> y la cultura.</p>
+            <p>👋 Hola. Exploro la intersección entre los <strong>modelos matemáticos</strong>, el <strong>IoT</strong> y la cultura.</p>
             <p>Aquí publico mis experimentos de código y visualización de datos.</p>
         </div>
 
-        <h2 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Mis Proyectos</h2>
+        <h2 class="section-title">Proyectos Selectos</h2>
         
         <div class="projects-grid">
             
             <a href="#" class="card disabled">
                 <h3>🌱 Cultivo Hidropónico IoT</h3>
-                <p>Monitoreo en tiempo real de humedad y temperatura con ESP32 y Supabase.</p>
-                <span class="tag">C++</span> <span class="tag">IoT</span> <span class="tag">En Construcción 🚧</span>
+                <p>Monitoreo en tiempo real de variables ambientales. ESP32 + Supabase.</p>
+                <div style="margin-top: 15px;">
+                    <span class="tag">C++</span> <span class="tag">Hardware</span> <span class="tag">En Construcción 🚧</span>
+                </div>
             </a>
 
             <a href="#" class="card disabled">
                 <h3>📊 Mortalidad Materna</h3>
-                <p>Análisis comparativo Colombia vs. Francia (1986-2024). Cálculo de R².</p>
-                <span class="tag">Data Viz</span> <span class="tag">Chart.js</span> <span class="tag">Próximamente</span>
+                <p>Análisis comparativo Colombia vs. Francia (1986-2024). Modelado estadístico.</p>
+                <div style="margin-top: 15px;">
+                    <span class="tag">Data Viz</span> <span class="tag">Chart.js</span> <span class="tag">Math</span>
+                </div>
             </a>
 
             <a href="#" class="card disabled">
                 <h3>🎨 Simbolismo Pijao</h3>
-                <p>Arte generativo y patrones indígenas recreados con código.</p>
-                <span class="tag">Creative Coding</span> <span class="tag">p5.js</span>
+                <p>Arte generativo y patrones indígenas recreados mediante algoritmos.</p>
+                <div style="margin-top: 15px;">
+                    <span class="tag">Creative Coding</span> <span class="tag">p5.js</span>
+                </div>
             </a>
 
         </div>
@@ -117,8 +200,83 @@
 
     <footer>
         <p>Conectemos en <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank">LinkedIn</a></p>
-        <p>© 2024 Jonathan Guambe</p>
+        <p>© 2024 Jhonatan. Code + Culture.</p>
     </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
+    
+    <script>
+        // Esta función inicia el motor de partículas
+        (async () => {
+            await tsParticles.load("tsparticles", {
+                // Configuración Cyberpunk Fluida
+                particles: {
+                    number: {
+                        value: 60, // Cantidad de partículas (no pongas muchas o se pone lento)
+                        density: { enable: true, value_area: 800 }
+                    },
+                    color: {
+                        value: "#ffffff" // Color blanco
+                    },
+                    shape: {
+                        type: "edge", // "edge" son cuadrados perfectos
+                    },
+                    opacity: {
+                        value: 0.3, // Semi-transparentes
+                        random: true,
+                        anim: { enable: true, speed: 0.5, opacity_min: 0.1, sync: false }
+                    },
+                    size: {
+                        value: 4, // Tamaño base
+                        random: true, // Tamaños variados
+                        anim: { enable: false }
+                    },
+                    // Esta es la parte de movimiento "fluido"
+                    move: {
+                        enable: true,
+                        speed: 0.8, // Lento y suave
+                        direction: "none",
+                        random: true, // Movimiento caótico pero suave
+                        straight: false,
+                        out_mode: "out", // Cuando salen de la pantalla, vuelven a entrar
+                        bounce: false,
+                        attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                    }
+                },
+                // Interactividad con el mouse
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "bubble" // "bubble" hace que crezcan, "repulse" hace que huyan
+                        },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    },
+                    modes: {
+                        bubble: {
+                            distance: 200,
+                            size: 8, // Crecen al pasar el mouse
+                            duration: 2,
+                            opacity: 0.8,
+                            speed: 3
+                        },
+                        repulse: { distance: 200, duration: 0.4 }
+                    }
+                },
+                retina_detect: true,
+                background: {
+                    color: "transparent", // El fondo es transparente para ver el color del body
+                    image: "",
+                    position: "50% 50%",
+                    repeat: "no-repeat",
+                    size: "cover"
+                }
+            });
+        })();
+    </script>
 
 </body>
 </html>
