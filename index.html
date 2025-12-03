@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>JHONATAN RONDON | ADVANCED SYSTEMS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,8 +14,8 @@
             --bg-color: #000000;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --accent: #ffffff; /* Blanco puro estilo Anduril */
-            --tech-cyan: #00f0ff; /* Pequeños detalles técnicos */
+            --accent: #ffffff;
+            --tech-cyan: #00f0ff;
             --border-color: rgba(255, 255, 255, 0.15);
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
@@ -27,78 +27,72 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: var(--font-sans);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Evita scroll horizontal */
         }
 
-        /* --- VIDEO DE FONDO --- */
+        /* --- VIDEO Y FONDO --- */
         #video-bg {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -3; /* Al fondo de todo */
+            position: fixed; right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: -3;
             object-fit: cover;
-            opacity: 0.6; /* Un poco oscuro para que se lea el texto */
-            filter: grayscale(80%) contrast(120%); /* Look técnico y frío */
+            opacity: 0.6;
+            filter: grayscale(80%) contrast(120%);
         }
 
-        /* Capa oscura sobre el video para mejorar legibilidad */
         .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); /* Un poco más oscuro para mejor lectura */
             z-index: -2;
         }
 
-        /* Partículas sobre el video */
         #tsparticles {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.5; pointer-events: none;
         }
 
-        /* --- HERO SECTION ESTILO ANDURIL --- */
+        /* --- HERO SECTION --- */
         header {
-            height: 90vh; /* Casi toda la pantalla */
+            /* En vez de altura fija, usamos min-height para que se adapte */
+            min-height: 85vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 1.5rem; /* Padding lateral seguro */
             position: relative;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
         .hero-tech-label {
             font-family: var(--font-mono);
-            font-size: 0.9rem;
-            letter-spacing: 3px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             color: var(--tech-cyan);
             margin-bottom: 1.5rem;
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 10px;
+            flex-wrap: wrap; justify-content: center;
         }
-
+        
+        /* Líneas decorativas al lado del label */
         .hero-tech-label::before, .hero-tech-label::after {
-            content: ''; height: 1px; width: 30px; background: var(--tech-cyan); opacity: 0.5;
+            content: ''; height: 1px; width: 20px; background: var(--tech-cyan); opacity: 0.5;
         }
 
         h1 {
-            font-size: clamp(3rem, 8vw, 7rem); /* Texto gigante responsivo */
+            /* FÓRMULA MÁGICA DE TAMAÑO: */
+            /* Se hace chico en cel (2.5rem) y grande en PC (5.5rem), no gigante */
+            font-size: clamp(2.5rem, 6vw, 5.5rem); 
             font-weight: 900;
-            line-height: 0.95;
+            line-height: 1.1;
             text-transform: uppercase;
             margin: 0 0 2rem 0;
-            letter-spacing: -2px;
-            max-width: 1200px;
-            /* Efecto sutil de textura en el texto */
+            letter-spacing: -1px;
+            max-width: 100%;
             background: linear-gradient(180deg, #fff 0%, #ccc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -106,64 +100,61 @@
 
         .hero-subtext {
             font-family: var(--font-mono);
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-primary);
-            max-width: 700px;
+            max-width: 600px;
             line-height: 1.6;
             margin-bottom: 3rem;
-            border-left: 3px solid var(--tech-cyan);
+            border-left: 2px solid var(--tech-cyan);
             padding-left: 20px;
             text-align: left;
+            /* En móvil centramos el texto o lo ajustamos */
         }
 
-        /* --- SECCIÓN DE PROYECTOS (COLLAGE GRID) --- */
+        /* --- GRID DE PROYECTOS --- */
         .main-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 2rem 1.5rem 6rem;
         }
 
         .section-header {
             font-family: var(--font-mono);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
+            display: flex; justify-content: space-between;
+            font-size: 0.9rem;
+            flex-wrap: wrap; gap: 10px;
         }
 
-        /* LA GRILLA COLLAGE */
+        /* CONFIGURACIÓN DE LA GRILLA RESPONSIVA */
         .collage-grid {
             display: grid;
-            /* 3 columnas de igual ancho */
+            /* Por defecto (PC): 3 columnas */
             grid-template-columns: repeat(3, 1fr);
-            /* Altura base de las filas */
-            grid-auto-rows: minmax(250px, auto);
+            grid-auto-rows: minmax(220px, auto);
             gap: 20px;
         }
 
-        /* --- TARJETAS TÉCNICAS --- */
+        /* TARJETAS */
         .card {
-            background: rgba(10, 10, 10, 0.8); /* Fondo semi-transparente */
+            background: rgba(10, 10, 10, 0.7);
             border: 1px solid var(--border-color);
-            padding: 2rem;
+            padding: 1.5rem;
             text-decoration: none;
             position: relative;
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            backdrop-filter: blur(5px); /* Efecto de cristal técnico */
+            display: flex; flex-direction: column; justify-content: space-between;
+            backdrop-filter: blur(8px);
             overflow: hidden;
         }
 
-        /* Bordes técnicos en las esquinas */
         .card::after {
-            content: '';
-            position: absolute; bottom: 0; right: 0;
-            width: 20px; height: 20px;
+            content: ''; position: absolute; bottom: 0; right: 0;
+            width: 15px; height: 15px;
             border-bottom: 2px solid var(--text-secondary);
             border-right: 2px solid var(--text-secondary);
             transition: all 0.3s;
@@ -172,97 +163,96 @@
         .card:hover {
             border-color: var(--accent);
             transform: translateY(-3px);
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(25, 25, 25, 0.9);
         }
-        .card:hover::after {
-            border-color: var(--tech-cyan);
-            width: 40px; height: 40px;
-        }
+        .card:hover::after { border-color: var(--tech-cyan); width: 30px; height: 30px; }
 
         .card-id {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: auto;
-            display: flex; justify-content: space-between;
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary);
+            margin-bottom: 1rem; display: flex; justify-content: space-between;
         }
 
         .card h3 {
-            font-family: var(--font-sans);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            margin: 1rem 0;
-            text-transform: uppercase;
+            font-family: var(--font-sans); font-size: 1.3rem; font-weight: 700;
+            color: white; margin: 0 0 1rem 0; text-transform: uppercase;
         }
 
         .card p {
-            color: #bbb;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
+            color: #bbb; font-size: 0.85rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;
         }
 
         .tech-stack {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--tech-cyan);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--tech-cyan);
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
 
-        /* CLASES ESPECIALES PARA EL COLLAGE */
-        /* Bloque vertical alto (ocupa 1 columna, 2 filas) */
-        .card-tall {
-            grid-row: span 2;
-        }
-        /* Bloque horizontal ancho (ocupa 2 columnas, 1 fila) */
-        .card-wide {
-            grid-column: span 2;
-        }
+        /* CLASES DE TAMAÑO (Solo funcionan en PC) */
+        .card-tall { grid-row: span 2; }
+        .card-wide { grid-column: span 2; }
 
-        /* Ajustes para móviles: que todo sea 1 columna */
-        @media (max-width: 768px) {
-            .collage-grid { grid-template-columns: 1fr; }
-            .card-tall, .card-wide { grid-column: auto; grid-row: auto; }
-            h1 { font-size: 3.5rem; }
-        }
-        
         footer {
-            text-align: center; padding: 4rem 2rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-secondary);
-            border-top: 1px solid var(--border-color); margin-top: 4rem;
+            text-align: center; padding: 2rem; font-family: var(--font-mono); 
+            font-size: 0.7rem; color: var(--text-secondary); border-top: 1px solid var(--border-color);
         }
+
+        /* --- MEDIA QUERIES (AQUÍ OCURRE LA MAGIA DEL CELULAR Y LAPTOP) --- */
+        
+        /* Tablets y Laptops Pequeñas (hasta 1024px) */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3.5rem; } /* Forzamos texto más pequeño */
+            .collage-grid { grid-template-columns: repeat(2, 1fr); } /* Pasamos a 2 columnas */
+            .card-tall { grid-row: auto; } /* Desactivamos altura especial */
+            .card-wide { grid-column: span 2; } /* Mantenemos anchura si cabe */
+        }
+
+        /* Celulares (hasta 768px) */
+        @media (max-width: 768px) {
+            header { padding: 6rem 1rem 2rem; min-height: auto; }
+            h1 { font-size: 2.2rem; margin-bottom: 1.5rem; }
+            
+            .hero-subtext { 
+                border-left: none; padding-left: 0; 
+                text-align: center; font-size: 0.9rem;
+            }
+            
+            /* En celular TODO es 1 sola columna */
+            .collage-grid { grid-template-columns: 1fr; gap: 15px; }
+            .card-tall, .card-wide { grid-column: auto; grid-row: auto; }
+            
+            .card { min-height: auto; }
+            .hero-tech-label { display: none; /* Ocultamos label decorativo en cel muy pequeño si molesta */ }
+        }
+
     </style>
 </head>
 <body>
 
-    <video autoplay muted loop id="video-bg">
+    <video autoplay muted loop playsinline id="video-bg">
         <source src="https://player.vimeo.com/external/558606840.hd.mp4?s=931122341248302088585487365868278580786&profile_id=175" type="video/mp4">
     </video>
     <div class="overlay"></div>
 
     <div id="tsparticles"></div>
 
-
     <header>
         <div class="hero-tech-label">Math & CS / Applied Intelligence / IoT Division</div>
-        <h1>Transforming Data<br>Into Defense &<br>Capabilities</h1>
+        <h1>Transforming Data<br>Into Capabilities</h1>
         
         <div class="hero-subtext">
             <p>
-                <strong>JHONATAN RONDON.</strong> Desarrollando arquitecturas de hardware y software para entender sistemas complejos.
-                Desde el monitoreo ambiental con IoT hasta el modelado estadístico de salud pública.
+                <strong>JHONATAN RONDON.</strong> Arquitectura de hardware y software para sistemas complejos.
+                Desde el monitoreo ambiental con IoT hasta el modelado estadístico de datos.
             </p>
         </div>
-        <div style="font-family: var(--font-mono); color: var(--tech-cyan); font-size: 0.8rem; margin-top: 2rem;">
-            SCROLL FOR CAPABILITIES ↓
+        
+        <div style="font-family: var(--font-mono); color: var(--tech-cyan); font-size: 0.7rem; margin-top: 1rem; opacity: 0.8;">
+            SCROLL FOR SYSTEM GRID ↓
         </div>
     </header>
 
-
     <div class="main-content">
         <div class="section-header">
-            <span>Deployed Systems & Research</span>
+            <span>Deployed Systems</span>
             <span>[ GRID_VIEW_ACTIVE ]</span>
         </div>
 
@@ -271,104 +261,78 @@
             <a href="#" class="card">
                 <div class="card-id"><span>IOT-AGRO-01</span><span>● LIVE</span></div>
                 <h3>Cultivo Hidropónico IoT</h3>
-                <p>Sistema embebido de precisión. Sensores ESP32 transmitiendo telemetría a Supabase en tiempo real.</p>
+                <p>Sistema embebido de precisión. Sensores ESP32 transmitiendo a Supabase.</p>
                 <div class="tech-stack">C++ / Hardware / Cloud DB</div>
             </a>
+            
             <a href="#" class="card">
                 <div class="card-id"><span>DATA-STAT-86</span><span>● ANALYSIS</span></div>
                 <h3>Mortalidad Materna</h3>
-                <p>Modelado estadístico longitudinal comparativo (Col vs Fra). Análisis de regresión R².</p>
+                <p>Modelado estadístico longitudinal (Col vs Fra). Análisis R².</p>
                 <div class="tech-stack">R Lang / Statistics / Viz</div>
             </a>
+            
             <a href="#" class="card">
                 <div class="card-id"><span>GEN-CULT-09</span><span>● RENDER</span></div>
                 <h3>Algoritmia Pijao</h3>
-                <p>Reconstrucción de patrones culturales indígenas mediante matemáticas generativas.</p>
+                <p>Reconstrucción cultural mediante matemáticas generativas.</p>
                 <div class="tech-stack">p5.js / Geometry / Culture</div>
             </a>
 
-
             <a href="#" class="card card-tall">
                 <div class="card-id"><span>AI-VISION-X</span><span>○ R&D</span></div>
-                <h3>Computer Vision Systems</h3>
-                <p>Investigación en detección de patrones automatizada para entornos de alta incertidumbre. Procesamiento de imágenes en el borde.</p>
-                <div class="tech-stack">Python / OpenCV / TensorFlow</div>
+                <h3>Computer Vision</h3>
+                <p>Detección de patrones automatizada en entornos de incertidumbre.</p>
+                <div class="tech-stack">Python / OpenCV / TF</div>
             </a>
 
             <a href="#" class="card card-wide">
                 <div class="card-id"><span>NET-SEC-GRID</span><span>○ CLASSIFIED</span></div>
-                <h3>Distributed Network Security</h3>
-                <p>Arquitectura de defensa para infraestructuras críticas IoT. Análisis de vectores de ataque en protocolos de comunicación.</p>
-                <div class="tech-stack">Rust / Networking / Cryptography</div>
+                <h3>Distributed Security</h3>
+                <p>Arquitectura de defensa para infraestructuras críticas IoT y vectores de ataque.</p>
+                <div class="tech-stack">Rust / Networking / Crypto</div>
             </a>
 
             <a href="#" class="card">
-                <div class="card-id"><span>QUANT-MOD-02</span><span>○ SIMULATION</span></div>
-                <h3>Quantitative Modeling</h3>
-                <p>Simulación de sistemas financieros complejos usando cálculo estocástico.</p>
-                <div class="tech-stack">Python / Math / Pandas</div>
+                <div class="card-id"><span>QUANT-MOD-02</span><span>○ SIM</span></div>
+                <h3>Quant Modeling</h3>
+                <p>Simulación de sistemas financieros estocásticos.</p>
+                <div class="tech-stack">Python / Math</div>
             </a>
             <a href="#" class="card">
-                <div class="card-id"><span>BIO-DATA-LNK</span><span>○ RESEARCH</span></div>
-                <h3>Bioinformatics Pipeline</h3>
-                <p>Procesamiento de secuencias genómicas a gran escala.</p>
-                <div class="tech-stack">R / Bioconductor / Big Data</div>
+                <div class="card-id"><span>BIO-DATA</span><span>○ LAB</span></div>
+                <h3>Bioinformatics</h3>
+                <p>Procesamiento genómico masivo.</p>
+                <div class="tech-stack">R / Big Data</div>
             </a>
              <a href="#" class="card">
-                <div class="card-id"><span>EDGE-COMP-77</span><span>○ PROTOTYPE</span></div>
-                <h3>Edge Computing Unit</h3>
-                <p>Despliegue de modelos ML ligeros en microcontroladores.</p>
-                <div class="tech-stack">C / TinyML / Embedded</div>
+                <div class="card-id"><span>EDGE-COMP</span><span>○ DEV</span></div>
+                <h3>Edge Computing</h3>
+                <p>ML ligero en microcontroladores.</p>
+                <div class="tech-stack">TinyML / C</div>
             </a>
 
         </div>
     </div>
 
     <footer>
-        SYS_ID: 93280026a // JHONATAN RONDON // ADVANCED SYSTEMS<br>
-        © 2024 Bogotá, Colombia. All rights reserved.
+        SYS_ID: 93280026a // JHONATAN RONDON<br>
+        © 2024. All rights reserved.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
     
     <script>
-        // CONFIGURACIÓN DE PARTÍCULAS: "RUIDO DIGITAL / NUBE DE PUNTOS"
-        // Inspirado en las referencias de densidad y caos pixelado
         (async () => {
             await tsParticles.load("tsparticles", {
                 particles: {
-                    number: { value: 150, density: { enable: true, value_area: 800 } },
+                    number: { value: 100, density: { enable: true, value_area: 800 } },
                     color: { value: "#ffffff" },
-                    shape: { type: "square" }, // Cuadrados para efecto pixel
-                    opacity: { 
-                        value: 0.5, 
-                        random: true,
-                        anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
-                    },
-                    size: { 
-                        value: 2, 
-                        random: { enable: true, minimumValue: 0.5 } // Tamaños muy variados
-                    },
-                    // SIN LÍNEAS, SOLO PUNTOS CAÓTICOS
+                    shape: { type: "square" },
+                    opacity: { value: 0.5, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                    size: { value: 2, random: { enable: true, minimumValue: 0.5 } },
                     links: { enable: false },
-                    move: {
-                        enable: true,
-                        speed: 0.3, // Movimiento lento casi estático, como estática de TV
-                        direction: "none",
-                        random: true, // Movimiento browniano caótico
-                        straight: false,
-                        out_mode: "out",
-                    }
-                },
-                interactivity: {
-                    detect_on: "canvas",
-                    events: {
-                        onhover: { enable: true, mode: "bubble" },
-                        resize: true
-                    },
-                    modes: {
-                        bubble: { distance: 100, size: 4, duration: 0.3, opacity: 1 }
-                    }
+                    move: { enable: true, speed: 0.3, direction: "none", random: true, out_mode: "out" }
                 },
                 retina_detect: true,
                 background: { color: "transparent" }
