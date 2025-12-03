@@ -1,190 +1,252 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jhonatan Rondon | Math & Data Science</title>
+    <title>JHONATAN RONDON | DATA SYSTEMS</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Paleta inspirada en Palantir/Anduril: Carbón, Pizarra, Blanco Técnico */
-            --bg-color: #0b0c10;
-            --surface-color: #111216;
-            --border-color: #2c2e33;
-            --border-highlight: #45a29e; /* Un cian apagado, muy técnico */
-            --text-primary: #ecf0f1;
-            --text-secondary: #8b9bb4;
-            --accent: #66fcf1; /* Acento sutil */
+            --bg-deep: #050505;
+            --bg-panel: #0a0a0a;
+            --line-color: #333;
+            --text-main: #e1e1e1;
+            --text-dim: #666;
+            --accent: #fff; /* Blanco puro para máxima severidad estilo Anduril */
+            --highlight: #00f0ff; /* Un cian eléctrico muy sutil para estados activos */
+            --mono-font: 'JetBrains Mono', monospace;
+            --sans-font: 'Inter', sans-serif;
         }
 
         body {
-            font-family: 'Manrope', sans-serif; /* Tipografía principal limpia */
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--sans-font);
             margin: 0;
-            padding: 0;
-            line-height: 1.7;
             overflow-x: hidden;
+            background-image: 
+                linear-gradient(var(--line-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line-color) 1px, transparent 1px);
+            background-size: 100px 100px; /* Grilla técnica de fondo sutil */
+            background-position: center top;
+        }
+
+        /* Efecto Vignette para oscurecer los bordes */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 40%, #050505 100%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         #tsparticles {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.6; /* Sutil, que no distraiga */
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            opacity: 0.4;
         }
 
-        /* --- HEADER TIPO "OPERATOR INTERFACE" --- */
+        /* --- UI ELEMENTS (Líneas y decoraciones técnicas) --- */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--line-color);
+            font-family: var(--mono-font);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            background: var(--bg-deep);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: var(--highlight);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            box-shadow: 0 0 10px var(--highlight);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* --- HERO SECTION --- */
         header {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 5rem 2rem 3rem;
-            border-bottom: 1px solid var(--border-color);
+            padding: 6rem 2rem 4rem;
+            position: relative;
         }
 
-        .role-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+        .hero-label {
+            font-family: var(--mono-font);
+            font-size: 0.8rem;
+            color: var(--highlight);
             letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            display: block;
+            border: 1px solid var(--line-color);
+            padding: 5px 10px;
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 800; /* Extra bold para impacto */
-            margin: 0;
-            letter-spacing: -1px;
-            color: #fff;
+            font-size: 5rem;
+            font-weight: 800;
+            line-height: 0.9;
+            margin: 0 0 2rem 0;
+            letter-spacing: -2px;
+            text-transform: uppercase;
         }
 
-        .bio {
-            max-width: 750px;
-            margin-top: 2rem;
-            color: var(--text-secondary);
-            font-size: 1.15rem;
+        .bio-block {
+            border-left: 2px solid var(--highlight);
+            padding-left: 2rem;
+            max-width: 600px;
+        }
+
+        .bio-text {
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.6;
             font-weight: 300;
         }
 
-        .bio strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
+        .bio-text strong { color: white; font-weight: 600; }
 
-        /* Botón estilo militar/industrial */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 2rem;
-            padding: 12px 24px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            border-color: var(--accent);
-            background: rgba(102, 252, 241, 0.05);
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .main-content {
-            max-width: 1200px;
+        /* --- DASHBOARD GRID --- */
+        .dashboard {
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: 2rem;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--line-color);
+            padding-bottom: 10px;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
+            font-family: var(--mono-font);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 20px;
         }
 
-        /* --- TARJETAS INDUSTRIALES --- */
+        /* --- TARJETAS TÉCNICAS (HUD STYLE) --- */
         .card {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid var(--line-color);
             padding: 2rem;
             text-decoration: none;
-            transition: transform 0.2s ease, border-color 0.2s ease;
+            position: relative;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 200px;
+            min-height: 250px;
+            overflow: hidden;
         }
+
+        /* Las esquinas estilo "visor" */
+        .card::before, .card::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .card::before { top: 0; left: 0; border-top-color: var(--text-dim); border-left-color: var(--text-dim); }
+        .card::after { bottom: 0; right: 0; border-bottom-color: var(--text-dim); border-right-color: var(--text-dim); }
 
         .card:hover {
-            border-color: var(--text-secondary); /* Cambio sutil al gris claro */
+            background: rgba(20, 20, 20, 0.9);
+            border-color: var(--text-main);
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Línea superior técnica en la tarjeta */
-        .card-top-line {
+        .card:hover::before { border-color: var(--highlight); width: 100%; height: 100%; }
+        .card:hover::after { border-color: var(--highlight); width: 100%; height: 100%; opacity: 0; }
+
+        .card-meta {
+            font-family: var(--mono-font);
+            font-size: 0.7rem;
+            color: var(--text-dim);
             display: flex;
             justify-content: space-between;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            opacity: 0.6;
+            margin-bottom: 1.5rem;
         }
 
         .card h3 {
-            margin: 0 0 1rem 0;
-            font-size: 1.25rem;
-            color: var(--text-primary);
+            font-family: var(--sans-font);
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 0 10px 0;
             font-weight: 600;
         }
 
         .card p {
-            color: var(--text-secondary);
+            color: #888;
             font-size: 0.95rem;
-            margin: 0 0 1.5rem 0;
+            line-height: 1.5;
             flex-grow: 1;
         }
 
-        .tech-list {
-            display: flex;
-            gap: 10px;
-            font-family: 'JetBrains Mono', monospace;
+        .tech-stack {
+            font-family: var(--mono-font);
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--highlight);
+            margin-top: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Botón Link */
+        .btn-link {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--text-main);
+            text-decoration: none;
+            border: 1px solid var(--text-dim);
+            padding: 10px 20px;
+            font-family: var(--mono-font);
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        
+        .btn-link:hover {
+            background: var(--highlight);
+            color: black;
+            border-color: var(--highlight);
         }
 
         footer {
-            border-top: 1px solid var(--border-color);
-            margin-top: 5rem;
-            padding: 3rem 2rem;
+            border-top: 1px solid var(--line-color);
+            margin-top: 4rem;
+            padding: 2rem;
             text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.8rem;
-            color: #555;
+            font-family: var(--mono-font);
+            font-size: 0.7rem;
+            color: var(--text-dim);
         }
 
     </style>
@@ -193,97 +255,98 @@
 
     <div id="tsparticles"></div>
 
-    <header>
-        <span class="role-label">:: Applied Mathematics & Computer Science</span>
-        <h1>Jhonatan Rondon</h1>
-        
-        <p class="bio">
-            Soy un profesional en formación apasionado por revelar el orden oculto en los datos. 
-            Combino el rigor de los <strong>modelos matemáticos</strong> con la practicidad de la <strong>ingeniería de datos</strong>.
-            <br><br>
-            Mi objetivo no es solo programar máquinas, sino crear herramientas que nos ayuden a entender mejor nuestra realidad, desde patrones culturales hasta estadísticas de salud pública.
-        </p>
+    <div class="top-bar">
+        <div>JHONATAN RONDON // PORTFOLIO</div>
+        <div>
+            <span class="status-dot"></span>SYSTEM ONLINE
+            <span style="margin-left: 20px">LOC: BOG-COL</span>
+        </div>
+    </div>
 
-        <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank" class="btn">
-            [ CONTACT_LINKEDIN ]
-        </a>
+    <header>
+        <div class="hero-label">MATH & COMPUTER SCIENCE</div>
+        <h1>Applied<br>Intelligence</h1>
+        
+        <div class="bio-block">
+            <p class="bio-text">
+                Enfocado en la arquitectura de soluciones que integran <strong>IoT</strong>, 
+                análisis matemático y visualización de datos. 
+                Construyendo herramientas para entender sistemas complejos.
+            </p>
+            <a href="https://www.linkedin.com/in/jhonatan-rondon-93280026a" target="_blank" class="btn-link">
+                [ OPEN_COMMUNICATION_LINK ]
+            </a>
+        </div>
     </header>
 
-    <div class="main-content">
+    <div class="dashboard">
         <div class="section-header">
-            <h2 class="section-title">Investigación & Desarrollo</h2>
-            <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: #666;">INDEX_ACTIVE</span>
+            <span class="section-title">Active Projects</span>
+            <span style="font-family: 'JetBrains Mono'; font-size: 0.8rem; color: #666;">SEC_01</span>
         </div>
-        
+
         <div class="grid" id="project-grid">
             
             <a href="#" class="card">
-                <div class="card-top-line">
-                    <span>ID: IOT-01</span>
-                    <span>STATUS: ACTIVE</span>
+                <div class="card-meta">
+                    <span>ID: AGRO-01</span>
+                    <span>STATUS: DEPLOYED</span>
                 </div>
                 <h3>Cultivo Hidropónico IoT</h3>
-                <p>Sistema embebido para agricultura de precisión. Arquitectura de microcontroladores (ESP32) enviando telemetría en tiempo real a bases de datos relacionales.</p>
-                <div class="tech-list">
-                    <span>C++</span> <span>/</span> <span>Supabase</span> <span>/</span> <span>Hardware</span>
-                </div>
+                <p>Infraestructura de monitoreo ambiental distribuido. Microcontroladores ESP32 transmitiendo telemetría a Supabase.</p>
+                <div class="tech-stack">C++ / HARDWARE / CLOUD DB</div>
             </a>
 
             <a href="#" class="card">
-                <div class="card-top-line">
-                    <span>ID: DATA-04</span>
+                <div class="card-meta">
+                    <span>ID: STATS-86</span>
                     <span>STATUS: ANALYSIS</span>
                 </div>
-                <h3>Análisis de Mortalidad Materna</h3>
-                <p>Estudio comparativo longitudinal (1986-2024) entre Colombia y Francia. Implementación de modelos de regresión y cálculo de coeficientes R².</p>
-                <div class="tech-list">
-                    <span>R Language</span> <span>/</span> <span>Statistics</span> <span>/</span> <span>Chart.js</span>
-                </div>
+                <h3>Mortalidad Materna</h3>
+                <p>Estudio longitudinal comparativo (Colombia-Francia). Modelado estadístico y cálculo de correlaciones R².</p>
+                <div class="tech-stack">R / DATA SCIENCE / VIZ</div>
             </a>
 
             <a href="#" class="card">
-                <div class="card-top-line">
-                    <span>ID: CULT-09</span>
-                    <span>STATUS: PUBLISHED</span>
+                <div class="card-meta">
+                    <span>ID: GEN-ART</span>
+                    <span>STATUS: RENDER</span>
                 </div>
-                <h3>Algoritmia Pijao</h3>
-                <p>Preservación cultural mediante código. Recreación de patrones geométricos indígenas utilizando matemáticas generativas.</p>
-                <div class="tech-list">
-                    <span>p5.js</span> <span>/</span> <span>Topology</span> <span>/</span> <span>Generative</span>
-                </div>
+                <h3>Simbolismo Pijao</h3>
+                <p>Algoritmos generativos aplicados a la preservación cultural. Reconstrucción geométrica de patrones indígenas.</p>
+                <div class="tech-stack">P5.JS / MATH / CULTURE</div>
             </a>
 
         </div>
     </div>
 
     <footer>
-        JHONATAN RONDON &copy; 2024<br>
-        Bogotá, Colombia.
+        SYS_ID: 93280026a // 2024 JHONATAN RONDON<br>
+        ALL SYSTEMS NOMINAL.
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
     
     <script>
-        // CONFIGURACIÓN DE PARTÍCULAS: GRAFOS MATEMÁTICOS (Palantir Style)
+        // CONFIGURACIÓN DE PARTÍCULAS: RED DE DATOS (Palantir/SpaceX Style)
         (async () => {
             await tsParticles.load("tsparticles", {
                 particles: {
-                    number: { value: 60, density: { enable: true, value_area: 1000 } },
-                    color: { value: "#8b9bb4" }, // Color gris azulado técnico
+                    number: { value: 50, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
                     shape: { type: "circle" },
-                    opacity: { value: 0.3 },
-                    size: { value: 2 },
-                    // CONEXIONES (IMPORTANTE PARA EL LOOK MATEMÁTICO)
+                    opacity: { value: 0.2 },
+                    size: { value: 1.5 },
                     links: {
                         enable: true,
                         distance: 150,
-                        color: "#8b9bb4",
-                        opacity: 0.2,
+                        color: "#ffffff",
+                        opacity: 0.1, // Líneas muy sutiles, casi invisibles
                         width: 1
                     },
                     move: {
                         enable: true,
-                        speed: 0.5, // Lento y deliberado
+                        speed: 0.6,
                         direction: "none",
                         random: false,
                         straight: false,
@@ -293,11 +356,11 @@
                 interactivity: {
                     detect_on: "canvas",
                     events: {
-                        onhover: { enable: true, mode: "grab" }, // Conectar nodos al pasar el mouse
+                        onhover: { enable: true, mode: "grab" },
                         resize: true
                     },
                     modes: {
-                        grab: { distance: 140, line_linked: { opacity: 0.6 } }
+                        grab: { distance: 140, line_linked: { opacity: 0.4 } }
                     }
                 },
                 retina_detect: true,
@@ -305,33 +368,23 @@
             });
         })();
 
-        // GENERADOR DE PROYECTOS (ESTILO INDUSTRIAL)
+        // GENERADOR DE PROYECTOS "CLASSIFIED" (Solo 3 extra para rellenar, no 20)
         const grid = document.getElementById('project-grid');
-        const totalProjects = 9; 
-        const existing = 3;
-
-        // Palabras clave más científicas/técnicas
-        const domains = ["Machine Learning", "Cryptography", "Network Security", "Bioinformatics", "Linear Algebra", "Cloud Computing"];
-        const codes = ["ML-02", "SEC-05", "BIO-88", "ALG-91", "CLD-12"];
-
-        for (let i = existing + 1; i <= totalProjects; i++) {
+        // Agregamos 3 espacios de "Coming Soon" para que se vea profesional pero en construcción
+        for (let i = 1; i <= 3; i++) {
             const card = document.createElement('a');
             card.className = 'card';
+            card.style.opacity = "0.5"; // Un poco más apagados
             card.href = '#';
             
-            const domain = domains[Math.floor(Math.random() * domains.length)];
-            const code = codes[Math.floor(Math.random() * codes.length)];
-            
             card.innerHTML = `
-                <div class="card-top-line">
-                    <span>ID: ${code}</span>
-                    <span>STATUS: ARCHIVED</span>
+                <div class="card-meta">
+                    <span>ID: R&D-0${i}</span>
+                    <span>STATUS: CLASSIFIED</span>
                 </div>
-                <h3>${domain} Research</h3>
-                <p>Simulación computacional y modelado de datos para resolver problemas complejos en entornos de incertidumbre.</p>
-                <div class="tech-list">
-                    <span>Python</span> <span>/</span> <span>Math</span> <span>/</span> <span>Research</span>
-                </div>
+                <h3>[ REDACTED ]</h3>
+                <p>Proyecto en fase de investigación y desarrollo. Datos confidenciales hasta el despliegue oficial.</p>
+                <div class="tech-stack">FUTURE / RESEARCH</div>
             `;
             grid.appendChild(card);
         }
