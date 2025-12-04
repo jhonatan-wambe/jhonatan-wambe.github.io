@@ -133,4 +133,210 @@
         }
 
         .card-id {
-            font-family: var(--font
+            font-family: var(--font-mono); font-size: 0.7rem; color: #666;
+            margin-bottom: 1rem; display: flex; justify-content: space-between;
+        }
+        .card h3 {
+            font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700;
+            color: white; margin: 0 0 1rem 0; text-transform: uppercase;
+        }
+        .card p {
+            color: #ccc; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;
+        }
+        .tech-stack {
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--tech-cyan);
+            text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9;
+        }
+
+        /* Efectos Hover */
+        .card:hover {
+            transform: scale(1.02) translateY(-5px);
+            background: rgba(30, 30, 35, 0.6);
+            border-color: var(--tech-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0, 240, 255, 0.05);
+            z-index: 10;
+        }
+
+        /* Tamaños Cards */
+        .card-wide { grid-column: span 2; } /* Ocupa 2 espacios (Ideal para Experiencia) */
+        .card-tall { grid-row: span 2; }
+
+        /* --- SECCIÓN STACK (NUEVA) --- */
+        .stack-section {
+            margin-top: 4rem;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 2rem;
+        }
+        .stack-grid {
+            display: flex; gap: 15px; flex-wrap: wrap; margin-top: 1rem;
+        }
+        .stack-item {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #fff;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 20px;
+            border: 1px solid var(--glass-border);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .stack-item:hover {
+            border-color: var(--tech-cyan);
+            color: var(--tech-cyan);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .collage-grid { grid-template-columns: repeat(2, 1fr); }
+            .card-tall { grid-row: auto; }
+            /* En tablet, la experiencia ocupa todo el ancho */
+            .card-wide { grid-column: span 2; } 
+        }
+        @media (max-width: 768px) {
+            .collage-grid { grid-template-columns: 1fr; }
+            .card-tall, .card-wide { grid-column: auto; grid-row: auto; }
+            .console-container { white-space: normal; border: none; animation: none; }
+            h1 { font-size: 3rem; }
+        }
+
+        footer {
+            text-align: center; padding: 4rem 2rem; font-family: var(--font-mono); 
+            font-size: 0.7rem; color: #555; margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="https://player.vimeo.com/external/494248888.sd.mp4?s=d946d0a7a40738600021b6d0891459424f603c4f&profile_id=165" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div id="tsparticles"></div>
+
+    <header>
+        <div class="console-container">
+            <h1>Jhonatan G. Rondon_</h1>
+        </div>
+        
+        <div class="hero-division">
+            Math & CS / Applied Intelligence / IoT Division
+        </div>
+        
+        <div class="hero-bio">
+            <p>
+                Arquitectura de hardware y software para sistemas complejos.<br>
+                Desde el <strong>monitoreo ambiental con IoT</strong> hasta el <strong>modelado estadístico de datos</strong>.
+                Convirtiendo señales físicas en inteligencia accionable.
+            </p>
+        </div>
+    </header>
+
+    <div class="main-content">
+        
+        <div class="section-header">
+            <span>Professional Background</span>
+            <span>[ HARDWARE_EXP ]</span>
+        </div>
+
+        <div class="collage-grid" style="margin-bottom: 3rem;">
+            <a href="#" class="card card-wide" style="min-height: auto;">
+                <div class="card-id"><span>TECNOCOM-ING</span><span>● 2022-2023</span></div>
+                <h3>Electronic Assembly Specialist</h3>
+                <p>
+                    Ensamblaje de precisión de tarjetas electrónicas y componentes SMD/THT. 
+                    Control de calidad en líneas de producción de hardware. 
+                    Esta experiencia me brindó un entendimiento profundo de la capa física (Physical Layer) necesaria para el IoT.
+                </p>
+                <div class="tech-stack">Hardware Assembly / Soldering / QA Control</div>
+            </a>
+             <a href="#" class="card" style="min-height: auto;">
+                <div class="card-id"><span>PRECISION-OPS</span><span>● VARIOUS</span></div>
+                <h3>Industrial Operations</h3>
+                <p>Experiencia en procesos de manufactura textil y construcción civil. Alta disciplina operativa y atención al detalle.</p>
+                <div class="tech-stack">Logistics / Discipline</div>
+            </a>
+        </div>
+
+
+        <div class="section-header">
+            <span>System Capabilities (Projects)</span>
+            <span>[ GRID_ACTIVE ]</span>
+        </div>
+
+        <div class="collage-grid">
+            
+            <a href="proyectos/cultivo-iot/index.html" class="card">
+                <div class="card-id"><span>IOT-AGRO-01</span><span>● ONLINE</span></div>
+                <h3>Cultivo Hidropónico IoT</h3>
+                <p>Sistema embebido de precisión. Telemetría ESP32 en tiempo real.</p>
+                <div class="tech-stack">C++ / Hardware / Supabase</div>
+            </a>
+            
+            <a href="#" class="card">
+                <div class="card-id"><span>DATA-STAT-86</span><span>● ANALYSIS</span></div>
+                <h3>Mortalidad Materna</h3>
+                <p>Modelado estadístico longitudinal (Col vs Fra). Regresión R².</p>
+                <div class="tech-stack">R Lang / Statistics / Viz</div>
+            </a>
+            
+            <a href="#" class="card">
+                <div class="card-id"><span>GEN-CULT-09</span><span>● RENDER</span></div>
+                <h3>Algoritmia Pijao</h3>
+                <p>Matemáticas generativas aplicadas a la preservación cultural.</p>
+                <div class="tech-stack">p5.js / Geometry / Culture</div>
+            </a>
+
+            <a href="#" class="card card-tall">
+                <div class="card-id"><span>AI-VISION-X</span><span>○ R&D</span></div>
+                <h3>Computer Vision</h3>
+                <p>Investigación en detección de patrones automatizada.</p>
+                <div class="tech-stack">Python / OpenCV</div>
+            </a>
+
+            <a href="#" class="card card-wide">
+                <div class="card-id"><span>NET-SEC-GRID</span><span>○ CLASSIFIED</span></div>
+                <h3>Distributed Security</h3>
+                <p>Arquitectura de defensa para infraestructuras críticas IoT.</p>
+                <div class="tech-stack">Rust / Networking</div>
+            </a>
+
+        </div>
+
+        <div class="stack-section">
+            <div class="section-header" style="border:none;">
+                <span>Technical Arsenal</span>
+            </div>
+            <div class="stack-grid">
+                <div class="stack-item">⚡ C++ (IoT/Embedded)</div>
+                <div class="stack-item">🐍 PYTHON (Data/AI)</div>
+                <div class="stack-item">💻 VISUAL STUDIO CODE</div>
+                <div class="stack-item">🐙 GITHUB / GIT</div>
+                <div class="stack-item">📊 R STUDIO</div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        SYS_ID: 93280026a // JHONATAN G. RONDON<br>
+        © 2024. Bogotá, Colombia.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
+    <script>
+        (async () => {
+            await tsParticles.load("tsparticles", {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: "#ffffff" },
+                    shape: { type: "square" },
+                    opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                    size: { value: 2, random: { enable: true, minimumValue: 0.5 } },
+                    links: { enable: false },
+                    move: { enable: true, speed: 0.4, direction: "none", random: true, out_mode: "out" }
+                },
+                retina_detect: true, background: { color: "transparent" }
+            });
+        })();
+    </script>
+</body>
+</html>
