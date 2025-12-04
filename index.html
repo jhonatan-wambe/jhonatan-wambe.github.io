@@ -7,19 +7,18 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@300;400&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #050505;
             --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --tech-cyan: #00f0ff;
-            --glass-bg: rgba(20, 20, 20, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-secondary: #999999;
+            --tech-cyan: #00f0ff; /* Cian puro, sin brillo difuso */
+            --glass-bg: rgba(15, 15, 15, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.15);
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --font-console: 'VT323', monospace; /* Tu nueva fuente */
         }
 
         body {
@@ -34,173 +33,192 @@
         #video-bg {
             position: fixed; right: 0; bottom: 0;
             min-width: 100%; min-height: 100%;
-            z-index: -3; object-fit: cover; opacity: 0.5;
-            filter: grayscale(100%) contrast(110%);
+            z-index: -3; object-fit: cover; opacity: 0.4;
+            filter: grayscale(100%) contrast(120%);
         }
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.75); z-index: -2;
+            background: rgba(0,0,0,0.7); z-index: -2;
         }
+        /* Partículas más visibles */
         #tsparticles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.4; pointer-events: none;
+            z-index: -1; opacity: 1 !important; /* Forzamos visibilidad */
+            pointer-events: none;
         }
 
         /* --- HERO SECTION --- */
         header {
-            min-height: 85vh; 
+            min-height: 90vh; 
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 4rem 1.5rem; position: relative;
             max-width: 1200px; margin: 0 auto;
         }
 
-        /* 1. EL NOMBRE ANIMADO (CONSOLA) */
-        .console-container {
-            display: inline-block;
-            overflow: hidden; /* Oculta el texto hasta que se escribe */
-            white-space: nowrap; /* Mantiene todo en una línea */
-            margin: 0 auto 1.5rem auto;
-            border-right: 0.15em solid var(--tech-cyan); /* El cursor */
-            animation: 
-                typing 3.5s steps(30, end),
-                blink-caret 0.75s step-end infinite;
+        /* NOMBRE: MODERN TERMINAL STYLE */
+        .name-wrapper {
+            display: inline-flex;
+            align-items: center;
+            border-bottom: 2px solid transparent; /* Espacio reservado */
         }
-
+        
         h1 {
-            font-family: var(--font-console); /* Fuente Pixelada */
-            font-size: clamp(3rem, 8vw, 6.5rem); 
-            font-weight: 400; /* La fuente pixel no necesita bold */
+            font-family: var(--font-sans); /* Fuente moderna, no pixelada */
+            font-size: clamp(2.5rem, 7vw, 6rem); 
+            font-weight: 800; /* Extra Bold */
             line-height: 1;
             text-transform: uppercase;
             margin: 0;
+            letter-spacing: -2px;
             color: #fff;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); /* Brillo de monitor viejo */
+            /* Eliminado el glow blanco, ahora es blanco sólido preciso */
         }
 
-        /* Animaciones de escritura */
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--tech-cyan) } }
+        /* El cursor es un bloque sólido, estilo terminal moderna */
+        .cursor-block {
+            display: inline-block;
+            width: 0.5em;
+            height: 1em; /* Altura del texto */
+            background-color: var(--tech-cyan);
+            margin-left: 10px;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
         .hero-division {
             font-family: var(--font-mono);
-            font-size: clamp(0.8rem, 2vw, 1.1rem);
-            letter-spacing: 2px;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            letter-spacing: 3px;
             color: var(--tech-cyan);
+            margin-top: 1.5rem;
             margin-bottom: 3rem;
             text-transform: uppercase;
-            display: inline-block;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 8px 16px;
-            background: rgba(0, 240, 255, 0.05);
-            backdrop-filter: blur(5px);
+            font-weight: 700;
         }
 
         .hero-bio {
             font-family: var(--font-sans);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             max-width: 750px;
             line-height: 1.6;
             margin: 0 auto;
-            font-weight: 300;
+            font-weight: 400;
         }
         .hero-bio strong { color: white; font-weight: 600; }
 
-        /* --- TARJETAS (Glassmorphism) --- */
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+        /* --- CONTENIDO --- */
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
 
+        /* TÍTULOS CENTRADOS */
         .section-header {
-            font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1px;
-            margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border);
-            padding-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;
-            color: var(--text-secondary);
+            display: flex; 
+            flex-direction: column;
+            align-items: center; /* Centrado horizontal */
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 3rem; 
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 2rem; 
         }
 
+        .section-title {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-meta {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--tech-cyan);
+        }
+
+        /* GRID */
         .collage-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
             grid-auto-rows: minmax(240px, auto); gap: 20px;
         }
 
+        /* TARJETAS */
         .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             padding: 2rem;
             text-decoration: none; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+            transition: all 0.3s ease;
+        }
+
+        /* Detalles técnicos en esquinas (estilo Anduril HUD) */
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--tech-cyan), transparent);
+            opacity: 0; transition: opacity 0.3s;
         }
 
         .card-id {
-            font-family: var(--font-mono); font-size: 0.7rem; color: #666;
+            font-family: var(--font-mono); font-size: 0.75rem; color: #666;
             margin-bottom: 1rem; display: flex; justify-content: space-between;
+            font-weight: 700;
         }
         .card h3 {
             font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700;
-            color: white; margin: 0 0 1rem 0; text-transform: uppercase;
+            color: white; margin: 0 0 1rem 0; text-transform: uppercase; letter-spacing: -0.5px;
         }
         .card p {
-            color: #ccc; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;
+            color: #ccc; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;
         }
         .tech-stack {
-            font-family: var(--font-mono); font-size: 0.7rem; color: var(--tech-cyan);
-            text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9;
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--tech-cyan);
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 10px;
         }
 
-        /* Efectos Hover */
         .card:hover {
-            transform: scale(1.02) translateY(-5px);
-            background: rgba(30, 30, 35, 0.6);
+            background: rgba(30, 30, 35, 0.8);
             border-color: var(--tech-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), inset 0 0 20px rgba(0, 240, 255, 0.05);
-            z-index: 10;
+            transform: translateY(-5px);
         }
+        .card:hover::before { opacity: 1; }
 
-        /* Tamaños Cards */
-        .card-wide { grid-column: span 2; } /* Ocupa 2 espacios (Ideal para Experiencia) */
+        .card-wide { grid-column: span 2; }
         .card-tall { grid-row: span 2; }
 
-        /* --- SECCIÓN STACK (NUEVA) --- */
-        .stack-section {
-            margin-top: 4rem;
-            border-top: 1px solid var(--glass-border);
-            padding-top: 2rem;
-        }
+        /* --- STACK SECTION (Sin Emojis) --- */
         .stack-grid {
-            display: flex; gap: 15px; flex-wrap: wrap; margin-top: 1rem;
+            display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 1rem;
         }
         .stack-item {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            color: #fff;
-            background: rgba(255,255,255,0.05);
-            padding: 10px 20px;
-            border: 1px solid var(--glass-border);
-            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-mono); font-size: 0.85rem; color: #ccc;
+            background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+            padding: 10px 15px; text-transform: uppercase;
         }
-        .stack-item:hover {
-            border-color: var(--tech-cyan);
-            color: var(--tech-cyan);
-        }
+        .stack-item strong { color: #fff; margin-right: 5px; }
+        .stack-item:hover { border-color: var(--tech-cyan); color: #fff; background: rgba(0, 240, 255, 0.1); }
 
         /* Responsive */
         @media (max-width: 1024px) {
             .collage-grid { grid-template-columns: repeat(2, 1fr); }
-            .card-tall { grid-row: auto; }
-            /* En tablet, la experiencia ocupa todo el ancho */
-            .card-wide { grid-column: span 2; } 
+            .card-tall { grid-row: auto; } .card-wide { grid-column: span 2; }
         }
         @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
             .collage-grid { grid-template-columns: 1fr; }
             .card-tall, .card-wide { grid-column: auto; grid-row: auto; }
-            .console-container { white-space: normal; border: none; animation: none; }
-            h1 { font-size: 3rem; }
+            .stack-grid { justify-content: flex-start; }
         }
 
         footer {
             text-align: center; padding: 4rem 2rem; font-family: var(--font-mono); 
-            font-size: 0.7rem; color: #555; margin-top: 2rem;
+            font-size: 0.7rem; color: #555; margin-top: 2rem; border-top: 1px solid var(--glass-border);
         }
     </style>
 </head>
@@ -213,8 +231,9 @@
     <div id="tsparticles"></div>
 
     <header>
-        <div class="console-container">
-            <h1>Jhonatan G. Rondon_</h1>
+        <div class="name-wrapper">
+            <h1>Jhonatan G. Rondon</h1>
+            <div class="cursor-block"></div>
         </div>
         
         <div class="hero-division">
@@ -233,67 +252,74 @@
     <div class="main-content">
         
         <div class="section-header">
-            <span>Professional Background</span>
-            <span>[ HARDWARE_EXP ]</span>
+            <div class="section-title">Professional Background</div>
+            <div class="section-meta">[ HARDWARE_LAYER ]</div>
         </div>
 
-        <div class="collage-grid" style="margin-bottom: 3rem;">
+        <div class="collage-grid" style="margin-bottom: 4rem;">
             <a href="#" class="card card-wide" style="min-height: auto;">
-                <div class="card-id"><span>TECNOCOM-ING</span><span>● 2022-2023</span></div>
+                <div class="card-id">
+                    <span>TECNOCOM INGENIERIA</span>
+                    <span>2022-2023</span>
+                </div>
                 <h3>Electronic Assembly Specialist</h3>
                 <p>
                     Ensamblaje de precisión de tarjetas electrónicas y componentes SMD/THT. 
                     Control de calidad en líneas de producción de hardware. 
-                    Esta experiencia me brindó un entendimiento profundo de la capa física (Physical Layer) necesaria para el IoT.
+                    Experiencia fundamental en la capa física (Physical Layer) para despliegue IoT.
                 </p>
                 <div class="tech-stack">Hardware Assembly / Soldering / QA Control</div>
             </a>
+             
              <a href="#" class="card" style="min-height: auto;">
-                <div class="card-id"><span>PRECISION-OPS</span><span>● VARIOUS</span></div>
+                <div class="card-id">
+                    <span>PRECISION OPS</span>
+                    <span>VARIOUS</span>
+                </div>
                 <h3>Industrial Operations</h3>
-                <p>Experiencia en procesos de manufactura textil y construcción civil. Alta disciplina operativa y atención al detalle.</p>
-                <div class="tech-stack">Logistics / Discipline</div>
+                <p>Procesos de manufactura textil y construcción civil. Ejecución operativa de alta disciplina.</p>
+                <div class="tech-stack">Logistics / Operations</div>
             </a>
         </div>
 
 
         <div class="section-header">
-            <span>System Capabilities (Projects)</span>
-            <span>[ GRID_ACTIVE ]</span>
+            <div class="section-title">System Capabilities</div>
+            <div class="section-meta">[ DEPLOYED_PROJECTS ]</div>
         </div>
 
         <div class="collage-grid">
             
             <a href="proyectos/cultivo-iot/index.html" class="card">
-                <div class="card-id"><span>IOT-AGRO-01</span><span>● ONLINE</span></div>
+                <div class="card-id"><span>IOT-AGRO-01</span><span>STATUS: LIVE</span></div>
                 <h3>Cultivo Hidropónico IoT</h3>
                 <p>Sistema embebido de precisión. Telemetría ESP32 en tiempo real.</p>
                 <div class="tech-stack">C++ / Hardware / Supabase</div>
             </a>
             
             <a href="#" class="card">
-                <div class="card-id"><span>DATA-STAT-86</span><span>● ANALYSIS</span></div>
+                <div class="card-id"><span>DATA-STAT-86</span><span>STATUS: ANALYSIS</span></div>
                 <h3>Mortalidad Materna</h3>
                 <p>Modelado estadístico longitudinal (Col vs Fra). Regresión R².</p>
                 <div class="tech-stack">R Lang / Statistics / Viz</div>
             </a>
             
             <a href="#" class="card">
-                <div class="card-id"><span>GEN-CULT-09</span><span>● RENDER</span></div>
+                <div class="card-id"><span>GEN-CULT-09</span><span>STATUS: RENDER</span></div>
                 <h3>Algoritmia Pijao</h3>
                 <p>Matemáticas generativas aplicadas a la preservación cultural.</p>
                 <div class="tech-stack">p5.js / Geometry / Culture</div>
             </a>
 
             <a href="#" class="card card-tall">
-                <div class="card-id"><span>AI-VISION-X</span><span>○ R&D</span></div>
+                <div class="card-id"><span>AI-VISION-X</span><span>TYPE: R&D</span></div>
                 <h3>Computer Vision</h3>
                 <p>Investigación en detección de patrones automatizada.</p>
                 <div class="tech-stack">Python / OpenCV</div>
             </a>
 
             <a href="#" class="card card-wide">
-                <div class="card-id"><span>NET-SEC-GRID</span><span>○ CLASSIFIED</span></div>
+                <div class="card-id"><span>NET-SEC-GRID</span><span>TYPE: CLASSIFIED</span></div>
                 <h3>Distributed Security</h3>
                 <p>Arquitectura de defensa para infraestructuras críticas IoT.</p>
                 <div class="tech-stack">Rust / Networking</div>
@@ -301,16 +327,17 @@
 
         </div>
 
-        <div class="stack-section">
-            <div class="section-header" style="border:none;">
-                <span>Technical Arsenal</span>
+        <div class="stack-section" style="margin-top: 5rem;">
+            <div class="section-header" style="border:none; margin-bottom: 1rem;">
+                <div class="section-title" style="font-size: 1.2rem;">Technical Arsenal</div>
             </div>
             <div class="stack-grid">
-                <div class="stack-item">⚡ C++ (IoT/Embedded)</div>
-                <div class="stack-item">🐍 PYTHON (Data/AI)</div>
-                <div class="stack-item">💻 VISUAL STUDIO CODE</div>
-                <div class="stack-item">🐙 GITHUB / GIT</div>
-                <div class="stack-item">📊 R STUDIO</div>
+                <div class="stack-item"><strong>[LANG]</strong> C++</div>
+                <div class="stack-item"><strong>[LANG]</strong> PYTHON</div>
+                <div class="stack-item"><strong>[LANG]</strong> R</div>
+                <div class="stack-item"><strong>[ENV]</strong> VS CODE</div>
+                <div class="stack-item"><strong>[VCS]</strong> GITHUB</div>
+                <div class="stack-item"><strong>[HW]</strong> ESP32/ARDUINO</div>
             </div>
         </div>
 
@@ -326,13 +353,20 @@
         (async () => {
             await tsParticles.load("tsparticles", {
                 particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    number: { value: 120, density: { enable: true, value_area: 800 } }, // MÁS DENSIDAD
                     color: { value: "#ffffff" },
-                    shape: { type: "square" },
-                    opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                    size: { value: 2, random: { enable: true, minimumValue: 0.5 } },
+                    shape: { type: "square" }, // Cuadrados = píxeles digitales
+                    opacity: { 
+                        value: 0.8, // MÁS VISIBLES (Antes 0.3)
+                        random: true, 
+                        anim: { enable: true, speed: 1, opacity_min: 0.2, sync: false } 
+                    },
+                    size: { 
+                        value: 2.5, // UN POCO MÁS GRANDES
+                        random: { enable: true, minimumValue: 1 } 
+                    },
                     links: { enable: false },
-                    move: { enable: true, speed: 0.4, direction: "none", random: true, out_mode: "out" }
+                    move: { enable: true, speed: 0.5, direction: "none", random: true, out_mode: "out" }
                 },
                 retina_detect: true, background: { color: "transparent" }
             });
