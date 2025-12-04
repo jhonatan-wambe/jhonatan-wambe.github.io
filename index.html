@@ -7,19 +7,19 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@300;400&family=VT323&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-color: #050505;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --accent: #ffffff;
-            --tech-cyan: #00f0ff; /* El color del Neón */
-            --glass-bg: rgba(20, 20, 20, 0.4); /* Fondo base muy transparente */
+            --tech-cyan: #00f0ff;
+            --glass-bg: rgba(20, 20, 20, 0.4);
             --glass-border: rgba(255, 255, 255, 0.1);
             --font-sans: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-console: 'VT323', monospace; /* Tu nueva fuente */
         }
 
         body {
@@ -39,7 +39,7 @@
         }
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); z-index: -2;
+            background: rgba(0,0,0,0.75); z-index: -2;
         }
         #tsparticles {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -54,22 +54,33 @@
             max-width: 1200px; margin: 0 auto;
         }
 
-        /* 1. EL NOMBRE (Ahora es lo gigante) */
-        h1 {
-            font-size: clamp(2.5rem, 7vw, 6rem); 
-            font-weight: 900;
-            line-height: 1;
-            text-transform: uppercase;
-            margin: 0 0 1.5rem 0;
-            letter-spacing: -2px;
-            background: linear-gradient(180deg, #fff 0%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            /* Sombra sutil para despegarlo del fondo */
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* 1. EL NOMBRE ANIMADO (CONSOLA) */
+        .console-container {
+            display: inline-block;
+            overflow: hidden; /* Oculta el texto hasta que se escribe */
+            white-space: nowrap; /* Mantiene todo en una línea */
+            margin: 0 auto 1.5rem auto;
+            border-right: 0.15em solid var(--tech-cyan); /* El cursor */
+            animation: 
+                typing 3.5s steps(30, end),
+                blink-caret 0.75s step-end infinite;
         }
 
-        /* 2. LA DIVISIÓN TÉCNICA (Subtítulo) */
+        h1 {
+            font-family: var(--font-console); /* Fuente Pixelada */
+            font-size: clamp(3rem, 8vw, 6.5rem); 
+            font-weight: 400; /* La fuente pixel no necesita bold */
+            line-height: 1;
+            text-transform: uppercase;
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5); /* Brillo de monitor viejo */
+        }
+
+        /* Animaciones de escritura */
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--tech-cyan) } }
+
         .hero-division {
             font-family: var(--font-mono);
             font-size: clamp(0.8rem, 2vw, 1.1rem);
@@ -84,7 +95,6 @@
             backdrop-filter: blur(5px);
         }
 
-        /* 3. LA PROPUESTA DE VALOR (Bio Centrada) */
         .hero-bio {
             font-family: var(--font-sans);
             font-size: 1.1rem;
@@ -96,13 +106,14 @@
         }
         .hero-bio strong { color: white; font-weight: 600; }
 
-        /* --- TARJETAS DE CRISTAL (GLASSMORPHISM) --- */
-        .main-content { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+        /* --- TARJETAS (Glassmorphism) --- */
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
 
         .section-header {
             font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 1px;
             margin-bottom: 2rem; border-bottom: 1px solid var(--glass-border);
             padding-bottom: 1rem; display: flex; justify-content: space-between; font-size: 0.9rem;
+            color: var(--text-secondary);
         }
 
         .collage-grid {
@@ -111,186 +122,15 @@
         }
 
         .card {
-            /* ESTILO DE VIDRIO OPACO */
             background: var(--glass-bg);
-            /* El blur es clave para el efecto vidrio */
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
-            
             padding: 2rem;
             text-decoration: none; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
             overflow: hidden;
-            
-            /* Transición suave para el "Efecto Viento/Aumento" */
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                        border-color 0.3s ease, 
-                        box-shadow 0.3s ease,
-                        background 0.3s;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s;
         }
 
-        /* TEXTURAS INTERNAS */
         .card-id {
-            font-family: var(--font-mono); font-size: 0.7rem; color: #666;
-            margin-bottom: 1rem; display: flex; justify-content: space-between;
-        }
-        .card h3 {
-            font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700;
-            color: white; margin: 0 0 1rem 0; text-transform: uppercase;
-        }
-        .card p {
-            color: #ccc; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1;
-        }
-        .tech-stack {
-            font-family: var(--font-mono); font-size: 0.7rem; color: var(--tech-cyan);
-            text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8;
-        }
-
-        /* --- HOVER EFFECTS (MAGIA AQUÍ) --- */
-        .card:hover {
-            /* 1. Efecto de "Viento/Aumento" (Escala) */
-            transform: scale(1.02) translateY(-5px);
-            
-            /* 2. Fondo un poco más claro */
-            background: rgba(30, 30, 35, 0.6);
-            
-            /* 3. Borde Neón y Resplandor */
-            border-color: var(--tech-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15), /* Resplandor externo */
-                        inset 0 0 20px rgba(0, 240, 255, 0.05); /* Resplandor interno */
-            z-index: 10;
-        }
-
-        /* Classes responsivas */
-        .card-tall { grid-row: span 2; }
-        .card-wide { grid-column: span 2; }
-
-        @media (max-width: 1024px) {
-            .collage-grid { grid-template-columns: repeat(2, 1fr); }
-            .card-tall { grid-row: auto; } .card-wide { grid-column: span 2; }
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .collage-grid { grid-template-columns: 1fr; }
-            .card-tall, .card-wide { grid-column: auto; grid-row: auto; }
-        }
-
-        footer {
-            text-align: center; padding: 4rem 2rem; font-family: var(--font-mono); 
-            font-size: 0.7rem; color: #555; border-top: 1px solid var(--glass-border);
-        }
-    </style>
-</head>
-<body>
-
-    <video autoplay muted loop playsinline id="video-bg">
-        <source src="https://player.vimeo.com/external/494248888.sd.mp4?s=d946d0a7a40738600021b6d0891459424f603c4f&profile_id=165" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-
-    <div id="tsparticles"></div>
-
-    <header>
-        <h1>Jhonatan G. Rondon</h1>
-        
-        <div class="hero-division">
-            Math & CS / Applied Intelligence / IoT Division
-        </div>
-        
-        <div class="hero-bio">
-            <p>
-                Arquitectura de hardware y software para sistemas complejos.<br>
-                Desde el <strong>monitoreo ambiental con IoT</strong> hasta el <strong>modelado estadístico de datos</strong>.
-                Convirtiendo señales físicas en inteligencia accionable.
-            </p>
-        </div>
-        
-        <div style="font-family: var(--font-mono); color: var(--tech-cyan); font-size: 0.7rem; margin-top: 3rem; opacity: 0.7; animation: blink 2s infinite;">
-            SCROLL TO ACCESS DATA ↓
-        </div>
-    </header>
-
-    <div class="main-content">
-        <div class="section-header">
-            <span>System Capabilities</span>
-            <span>[ GRID_ACTIVE ]</span>
-        </div>
-
-        <div class="collage-grid">
-            
-            <a href="proyectos/cultivo-iot/index.html" class="card">
-                <div class="card-id"><span>IOT-AGRO-01</span><span>● ONLINE</span></div>
-                <h3>Cultivo Hidropónico IoT</h3>
-                <p>Sistema embebido de precisión. Telemetría ESP32 en tiempo real.</p>
-                <div class="tech-stack">C++ / Hardware / Supabase</div>
-            </a>
-            
-            <a href="#" class="card">
-                <div class="card-id"><span>DATA-STAT-86</span><span>● ANALYSIS</span></div>
-                <h3>Mortalidad Materna</h3>
-                <p>Modelado estadístico longitudinal (Col vs Fra). Regresión R².</p>
-                <div class="tech-stack">R Lang / Statistics / Viz</div>
-            </a>
-            
-            <a href="#" class="card">
-                <div class="card-id"><span>GEN-CULT-09</span><span>● RENDER</span></div>
-                <h3>Algoritmia Pijao</h3>
-                <p>Matemáticas generativas aplicadas a la preservación cultural.</p>
-                <div class="tech-stack">p5.js / Geometry / Culture</div>
-            </a>
-
-            <a href="#" class="card card-tall">
-                <div class="card-id"><span>AI-VISION-X</span><span>○ R&D</span></div>
-                <h3>Computer Vision</h3>
-                <p>Investigación en detección de patrones para entornos de alta incertidumbre.</p>
-                <div class="tech-stack">Python / OpenCV / TensorFlow</div>
-            </a>
-
-            <a href="#" class="card card-wide">
-                <div class="card-id"><span>NET-SEC-GRID</span><span>○ CLASSIFIED</span></div>
-                <h3>Distributed Security</h3>
-                <p>Arquitectura de defensa para infraestructuras críticas IoT.</p>
-                <div class="tech-stack">Rust / Networking / Crypto</div>
-            </a>
-
-            <a href="#" class="card">
-                <div class="card-id"><span>QUANT-MOD-02</span><span>○ SIM</span></div>
-                <h3>Quant Modeling</h3>
-                <p>Simulación de sistemas financieros estocásticos.</p>
-                <div class="tech-stack">Python / Math</div>
-            </a>
-            <a href="#" class="card">
-                <div class="card-id"><span>EDGE-COMP</span><span>○ DEV</span></div>
-                <h3>Edge Computing</h3>
-                <p>Machine Learning ligero en microcontroladores.</p>
-                <div class="tech-stack">TinyML / C</div>
-            </a>
-
-        </div>
-    </div>
-
-    <footer>
-        SYS_ID: 93280026a // JHONATAN G. RONDON<br>
-        © 2024. Bogotá, Colombia.
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
-    <script>
-        (async () => {
-            await tsParticles.load("tsparticles", {
-                particles: {
-                    number: { value: 80, density: { enable: true, value_area: 800 } },
-                    color: { value: "#ffffff" },
-                    shape: { type: "square" },
-                    opacity: { value: 0.3, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
-                    size: { value: 2, random: { enable: true, minimumValue: 0.5 } },
-                    links: { enable: false },
-                    move: { enable: true, speed: 0.4, direction: "none", random: true, out_mode: "out" }
-                },
-                retina_detect: true, background: { color: "transparent" }
-            });
-        })();
-    </script>
-</body>
-</html>
+            font-family: var(--font
